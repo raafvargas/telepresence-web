@@ -8,43 +8,113 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
   <style>
-    #publisherContainer.large {
-      width: 640px;
-      height: 480px;
+    .video-container {
+      position: fixed;
+      top: 30%;
+      left: 34%;
+      width: 60em;
+      height: 36em;
+      margin-top: -15em;
+      margin-left: -15em;
+      border: 1px solid black;
+      background-color: black;
+      overflow: hidden;
     }
     
-    #publisherContainer.small {
-      width: 100px;
-      height: 100px;
+    .button-container {
+      position: fixed;
+      top: 30%;
+      left: 34%;
+      width: 60em;
+      height: 10em;
+      margin-top: 21em;
+      margin-left: -15em;
+      border: 1px solid black;
+      background-color: black;
+      overflow: hidden;
+    }
+    
+    #subscriberDiv {
+      width: 30em;
+      height: 36em;
+      position: fixed;
+      float: left;
+      float: left !important;
+      margin-left: 30em;
+    }
+    
+    #myPublisherDiv {
+      width: 30em;
+      height: 36em;
+      position: fixed;
+      float: right;
+    }
+    
+    .fixed {
+      position: fixed;
+      width: 100%;
+      margin-top: 88%;
+    }
+    
+    #y-positive {
+      width: 60em;
+    }
+    
+    #y-negative {
+      width: 60em;
+    }
+    
+    #x-positive {
+      width: 60em;
+    }
+    
+    #x-negative {
+      width: 60em;
     }
   </style>
 </head>
 
-<body>
-
-  <div id='subscriberDiv'>
-    <div id='myPublisherDiv'>
+<body style="margin: 0px; background-image: url('http://www.designyourway.net/diverse/darkpat/COLOURlovers.com-box_surprise_mystery.jpg');">
+  <div class="container">
+    <div class="video-container">
+      <div id="subscriberDiv">
+      </div>
+      <div id="myPublisherDiv">
+      </div>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12">
-      <button class="col-md-6 col-lg-6 col-sm-6 btn btn-primary" id="y-positive">Y+</button>
-      <button class="col-md-6 col-lg-6 col-sm-6 btn btn-primary" id="y-negative">Y-</button>
+    <div class="button-container">
+      <div class="form-inline">
+        <div class="form-group">
+          <button class="btn btn-success" id="y-positive">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-info" id="x-positive">
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-warning" id="x-negative">
+            <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-danger" id="y-negative">
+            <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+      <div class="form-inline">
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 col-lg-12 col-sm-12">
-      <button class="col-md-6 col-lg-6 col-sm-6 btn btn-primary" id="x-positive">X+</button>
-      <button class="col-md-6 col-lg-6 col-sm-6 btn btn-primary" id="x-negative">X-</button>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+      crossorigin="anonymous"></script>
 
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-  <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
-  <script charset="utf-8">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://static.opentok.com/v2/js/opentok.js" charset="utf-8"></script>
+    <script charset="utf-8">
+      (function(){
         var apiKey = '45633112';
         var sessionId = '2_MX40NTYzMzExMn5-MTQ3MDU4NTA4NTA0N35NeFAwNGdNazhvRVd1VE5ZL3ZJeUtlNDd-fg';
         var token = 'T1==cGFydG5lcl9pZD00NTYzMzExMiZzaWc9MTlmMWZhMmU4NDI3NzY0ZTc2YTRmMTcxMTdlMGFlYzA0OGVkYjI0ZTpzZXNzaW9uX2lkPTJfTVg0ME5UWXpNekV4TW41LU1UUTNNRFU0TlRBNE5UQTBOMzVOZUZBd05HZE5hemh2UlZkMVZFNVpMM1pKZVV0bE5EZC1mZyZjcmVhdGVfdGltZT0xNDcxOTA1MTEwJm5vbmNlPTAuODUyOTczMTg5MjA0OTMxMyZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNDc0NDk3MTA4';
@@ -58,23 +128,9 @@
         .on('streamCreated', function(event) {
           session.subscribe(event.stream, 'subscriberDiv', subscriberOptions);
         });
-
-        document.addEventListener('keydown', function(event) {
-          if(event.keyCode == 37) {
-            alert('Left was pressed');
-          }
-          else if(event.keyCode == 38) {
-            alert('Up was pressed');
-          }
-          else if(event.keyCode == 39) {
-            alert('Right was pressed');
-          }
-          else if(event.keyCode == 40) {
-            alert('Down was pressed');
-          }
-        });
+      })();
   </script>
-  <script>  
+    <script>  
     $(function(){
       var API_ENDPOINT = 'http://telepresence-api.azurewebsites.net/api';
       var USER_ID = '90207322-d22c-455a-961e-e1df4d558dce';
@@ -137,6 +193,7 @@
       });
     });
   </script>
+  </div>
 </body>
 
 </html>
