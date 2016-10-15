@@ -145,15 +145,12 @@
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
             success: function(res){
-              console.log(res);
               if(res.success)
                 toastr.success('Comando enviado com sucesso');
               else
                 toastr.error('Erro ao enviar o comando');
-
             },
             error: function(res){
-              console.log(res);
               toastr.error('Erro ao enviar o comando');
             }
           });
@@ -176,12 +173,32 @@
             });
       });
 
-      $('#y-positive').click(function(){
+      var yPositiveIsDown = false;
+      $('#y-positive').mousedown(function(){
+        yPositiveIsDown = true;
         service.sendCommand({
-              axisX: 0,
-              axisY: 1,
-              userId: USER_ID
-            });
+          axisX: 0,
+          axisY: 1,
+          userId: USER_ID
+        });
+
+        setTimeout(function(){
+          if(yPositiveIsDown){
+            setInterval(function(){
+              if(yPositiveIsDown){
+                service.sendCommand({
+                  axisX: 0,
+                  axisY: 1,
+                  userId: USER_ID
+                });
+              }
+            }, 500);
+          }
+        }, 300);
+      });
+
+      $('#y-positive').mouseup(function(){
+        yPositiveIsDown = false;
       });
 
       $('#y-negative').click(function(){
